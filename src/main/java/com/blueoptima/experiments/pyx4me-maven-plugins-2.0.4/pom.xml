@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0">
+    <!-- @version $Revision: 3401 $ ($Author: vlads $) $Date: 2009-05-05 18:31:39 -0400 (Tue, 05 May 2009) $ -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.pyx4me</groupId>
+        <artifactId>pyx4me</artifactId>
+        <version>2.0.4</version><!--pyx4me-version-->
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>pyx4me-maven-plugins</artifactId>
+    <name>pyx4me-maven-plugins</name>
+    <description>pyx4me-maven-plugins parent</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>proguard-maven-plugin</module>
+        <module>j2me-maven-plugin</module>
+        <module>gammu-maven-plugin</module>
+        <module>obex-maven-plugin</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-project</artifactId>
+            <version>2.0</version>
+            <exclusions>
+                <!--
+                    To remove this warning
+                    [WARNING] Artifact junit:junit:jar:3.8.1:test retains local scope 'test' overriding broader scope 'compile'
+                              given by a dependency. If this is not intended, modify or remove the local scope.
+                -->
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.4</source>
+                    <target>1.4</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jxr-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+        </plugins>
+    </reporting>
+
+</project>

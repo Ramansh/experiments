@@ -1,0 +1,738 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<name>uix-server</name>
+	<url>http://maven.apache.org</url>
+
+	<groupId>com.blueoptima.uix</groupId>
+	<artifactId>uix-server</artifactId>
+
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<properties>
+		<jdk.version>1.8</jdk.version>
+		<junit.version>4.11</junit.version>
+		<spring.version>4.2.2.RELEASE</spring.version>
+		<hibernate.version>4.3.9.Final</hibernate.version>
+		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
+		<spring.security.version>3.2.8.RELEASE</spring.security.version>
+		<java.jwt.version>2.0.1</java.jwt.version>
+		<saml.version>1.0.1.RELEASE</saml.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- AspectJ -->
+		<aspectj.version>1.8.1</aspectj.version>
+		<jackson.version>2.9.9</jackson.version>
+	</properties>
+
+
+	<repositories>
+		<repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>https://jcenter.bintray.com/</url>
+		</repository>
+		<repository>
+			<id>my-local-repo</id>
+			<url>file://${basedir}/lib/</url>
+		</repository>
+		<repository>
+			<id>alfresco</id>
+			<url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+		</repository>
+		<repository>
+		<id>mulesoft</id>
+		<url>https://repository.mulesoft.org/releases/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.owasp.encoder/encoder -->
+		<dependency>
+			<groupId>org.owasp.encoder</groupId>
+			<artifactId>encoder</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.owasp.esapi/esapi
+		<dependency>
+			<groupId>org.owasp.esapi</groupId>
+			<artifactId>esapi</artifactId>
+			<version>2.1.0</version>
+		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/org.owasp.esapi/esapi -->
+		<dependency>
+		<groupId>org.owasp.esapi</groupId>
+		<artifactId>esapi</artifactId>
+			<version>2.1.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.owasp.antisamy</groupId>
+					<artifactId>antisamy</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xalan</groupId>
+					<artifactId>xalan</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-fileupload</groupId>
+					<artifactId>commons-fileupload</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-beanutils</groupId>
+					<artifactId>commons-beanutils-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.63</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.opensaml/opensaml -->
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml</artifactId>
+			<version>2.6.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-httpclient</groupId>
+					<artifactId>commons-httpclient</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ca.juliusdavies</groupId>
+					<artifactId>not-yet-commons-ssl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>${java.jwt.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1-rc1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/ca.juliusdavies/not-yet-commons-ssl -->
+		<dependency>
+			<groupId>ca.juliusdavies</groupId>
+			<artifactId>not-yet-commons-ssl</artifactId>
+			<version>0.3.17</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+
+		<!-- Spring Core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hornetq</groupId>
+			<artifactId>hornetq-jms-client</artifactId>
+			<version>2.4.1.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+
+		<!--Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<!-- Added for SAML -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!--Spring Aspects-->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+
+		<!-- Spring SAML -->
+
+		<dependency>
+			<groupId>org.springframework.security.extensions</groupId>
+			<artifactId>spring-security-saml2-core</artifactId>
+			<version>${saml.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.opensaml</groupId>
+					<artifactId>opensaml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>bouncycastle</groupId>
+					<artifactId>bcprov-jdk15</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	<dependency>
+		<groupId>bouncycastle</groupId>
+		<artifactId>bcprov-jdk15</artifactId>
+		<version>124</version>
+	</dependency>
+		<!-- Hibernate dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.10</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-cbor</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!--Password Encryption-->
+		<dependency>
+			<groupId>com.blueoptima</groupId>
+			<artifactId>encryption-service</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/passEncryption.jar</systemPath>
+		</dependency>
+		<!--Google Apis for Json conversion to object/object to Json-->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<!--Apis for AWS-->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.10.69</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ning</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>1.9.36</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.4.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-beanutils</groupId>
+					<artifactId>commons-beanutils</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--csv-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!--Common Filer-->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-io</groupId>
+					<artifactId>commons-io</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>c3p0</groupId>
+					<artifactId>c3p0</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>25.0-jre</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/xalan/xalan -->
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.owasp.antisamy/antisamy -->
+		<dependency>
+			<groupId>org.owasp.antisamy</groupId>
+			<artifactId>antisamy</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+
+		<!-- dependency for storing keys on google cloud storage -->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-storage</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.23</version>
+		</dependency>
+
+		<!-- httpmime -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+		<!--Onfido maven dependency as it is not available on maven central -->
+		<dependency>
+			<groupId>com.onfido</groupId>
+			<artifactId>onfido-java</artifactId>
+			<version>1.6.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/onfido-java-1.6.0.jar</systemPath>
+		</dependency>
+
+		<!--dependency for onfido library (explicitly mentioned as onfido is added locally)-->
+		<dependency>
+			<groupId>com.squareup.okhttp</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>2.7.5</version>
+		</dependency>
+
+		<!-- locally build rsql parser for search query parsing -->
+		<dependency>
+			<groupId>cz.jirutka.rsql</groupId>
+			<artifactId>rsql-parser</artifactId>
+			<version>2.1.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/rsql-parser-2.1.1.jar</systemPath>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j -->
+		<dependency>
+			<groupId>net.lingala.zip4j</groupId>
+			<artifactId>zip4j</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.10</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!--https://mvnrepository.com/artifact/org.powermock/powermock-module-testng-->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-testng</artifactId>
+			<version>1.6.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>1.6.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.unitils/unitils-testng -->
+		<!-- https://mvnrepository.com/artifact/org.unitils/unitils-testng -->
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-testng</artifactId>
+			<version>3.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-artifact -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-artifact</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
+		<dependency>
+			<groupId>com.relevantcodes</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>2.41.2</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<!--Profiles for build server and jenkins-->
+	<profiles>
+		<profile>
+			<id>build-server</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+				<!--Execute Grunt in Testing Interface-->
+					<plugin>
+						<artifactId>exec-maven-plugin</artifactId>
+						<groupId>org.codehaus.mojo</groupId>
+						<executions>
+							<execution>
+								<id>JS Grunting</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>${basedir}/grunt.sh</executable>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>findbugs-maven-plugin</artifactId>
+						<version>2.5.2</version>
+						<configuration>
+							<!--
+                Enables analysis which takes more memory but finds more bugs.
+                If you run out of memory, changes the value of the effort element
+                to 'low'.
+              -->
+							<effort>Max</effort>
+							<!-- Reports all bugs (other values are medium and max) -->
+							<threshold>Low</threshold>
+							<!-- Produces XML report -->
+							<xmlOutput>true</xmlOutput>
+						</configuration>
+					</plugin>
+					<!--Execute Grunt in Uix Server-->
+				</plugins>
+			</build>
+
+			<properties>
+				<build.profile.id>build-server</build.profile.id>
+				<!--Running unit test cases on default profile by passing service suite file-->
+				<suite.file.path>src/test/resources/uix-service-suite.xml</suite.file.path>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>unit-tests</id>
+			<properties>
+				<build.profile.id>unit-tests</build.profile.id>
+				<!--Running only unit test cases on this profile by passing service suite file-->
+				<suite.file.path>src/test/resources/uix-service-suite.xml</suite.file.path>
+			</properties>
+		</profile>
+		<!-- TODO : Add profile for integration tests when completed -->
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.artifactId}/uix</outputDirectory>
+							<resources>
+								<resource>
+									<!--<directory>uix</directory>-->
+									<directory>uix/uix</directory>
+									<filtering>false</filtering>
+									<!--<excludes>-->
+									<!--<exclude>uix/**</exclude>-->
+									<!--</excludes>-->
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-packaged</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<!--<goal>copy</goal>-->
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!--<artifactItems>
+							<artifactItem>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+							<type>${project.packaging}</type>
+							<destFileName>${project.artifactId}.${project.packaging}</destFileName>
+							</artifactItem>
+							</artifactItems>-->
+							<outputDirectory>${project.build.directory}/${project.artifactId}\WEB-INF\lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.5</version>
+				<configuration>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+					<targetJdk>1.7</targetJdk>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${suite.file.path}</suiteXmlFile>
+					</suiteXmlFiles>
+					<!-- todo : (rajusi) skipTests should be removed once all tests are fixed on develop branch -->
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+		<finalName>${project.artifactId}</finalName>
+	</build>
+</project>

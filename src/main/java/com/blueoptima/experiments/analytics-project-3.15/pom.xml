@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>atlassian-closedsource-pom</artifactId>
+        <version>26.16</version>
+    </parent>
+
+    <groupId>com.atlassian.analytics</groupId>
+    <artifactId>analytics-project</artifactId>
+    <version>3.15</version>
+
+    <packaging>pom</packaging>
+
+    <name>Analytics Project</name>
+
+    <modules>
+        <module>analytics-server</module>
+        <module>analytics-client</module>
+        <module>analytics-events</module>
+        <module>analytics-api</module>
+        <module>analytics-client-jira-tests</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>11.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <slf4j.version>1.6.4</slf4j.version>
+        <mockito.version>1.9.0</mockito.version>
+        <junit.version>4.10</junit.version>
+        <enforcer.skip>true</enforcer.skip><!-- needed for release to work -->
+        <skipTests>false</skipTests>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@bitbucket.org:atlassian/atlassian-analytics.git</connection>
+        <developerConnection>scm:git:git@bitbucket.org:atlassian/atlassian-analytics.git</developerConnection>
+        <url>https://bitbucket.org/atlassian/atlassian-analytics</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Atlassian 3.0 End User License Agreement</name>
+            <url>http://www.atlassian.com/end-user-agreement/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <build>
+        <defaultGoal>verify</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12.4</version>
+                    <configuration>
+                        <skipTests>${skipTests}</skipTests>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <profiles>
+        <profile>
+            <id>skipTests</id>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </profile>
+    </profiles>
+</project>

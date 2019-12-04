@@ -1,0 +1,51 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>excalibur-component</groupId>
+  <artifactId>excalibur-testcase</artifactId>
+  <name>Excalibur Testcase</name>
+  <version>2.1</version>
+  <description>This project contains utilities for managing components. ECM
+is what we call an "avalon container", though it is somewhat
+different in architecture to newer developments like Phoenix
+and Fortress. Our intend is to someday completely replace ECM
+with Fortress. In particular, this package contains the
+ExcaliburComponentManager, usually abbreviated to ECM.</description>
+  <inceptionYear>2004</inceptionYear>
+  <dependencies>
+    <dependency>
+      <groupId>avalon-logkit</groupId>
+      <artifactId>avalon-logkit</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>avalon-framework</groupId>
+      <artifactId>avalon-framework-api</artifactId>
+      <version>4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>avalon-framework</groupId>
+      <artifactId>avalon-framework-impl</artifactId>
+      <version>4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>excalibur-logger</groupId>
+      <artifactId>excalibur-logger</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>excalibur-component</groupId>
+      <artifactId>excalibur-component</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>excalibur-instrument</groupId>
+      <artifactId>excalibur-instrument-api</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+  </dependencies>
+</project>

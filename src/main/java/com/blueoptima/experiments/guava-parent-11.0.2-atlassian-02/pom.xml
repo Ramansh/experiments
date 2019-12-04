@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  <groupId>com.google.guava</groupId>
+  <artifactId>guava-parent</artifactId>
+  <version>11.0.2-atlassian-02</version>
+  <packaging>pom</packaging>
+  <name>Guava Maven Parent</name>
+  <url>http://code.google.com/p/guava-libraries</url>
+  <issueManagement>
+    <system>code.google.com</system>
+    <url>http://code.google.com/p/guava-libraries/issues</url>
+  </issueManagement>
+  <inceptionYear>2010</inceptionYear>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <prerequisites>
+    <maven>2.0.9</maven>
+  </prerequisites>
+  <scm>
+    <connection>scm:git:ssh://git@bitbucket.org:atlassian/atlassian-guava.git</connection>
+    <developerConnection>scm:git:ssh://git@bitbucket.org:atlassian/atlassian-guava.git</developerConnection>
+    <url>https://bitbucket.org/atlassian/atlassian-guava</url>
+    <tag>atlassian-02</tag>
+  </scm>
+  <developers>
+    <developer>
+      <id>kevinb9n</id>
+      <name>Kevin Bourillion</name>
+      <email>kevinb@google.com</email>
+      <organization>Google</organization>
+      <organizationUrl>http://www.google.com</organizationUrl>
+      <roles>
+        <role>owner</role>
+        <role>developer</role>
+      </roles>
+      <timezone>-8</timezone>
+    </developer>
+  </developers>
+  <modules>
+    <module>guava-bridge</module>
+    <module>guava</module>
+    <module>guava-bootstrap</module>
+    <module>guava-gwt</module>
+    <module>guava-testlib</module>
+    <module>guava-tests</module>
+  </modules>
+  <properties>
+    <jdkLevel>1.5</jdkLevel>
+  </properties>
+    <distributionManagement>
+        <repository>
+            <id>atlassian-3rdparty</id>
+            <url>https://maven.atlassian.com/3rdparty</url>
+        </repository>
+        <snapshotRepository>
+            <id>atlassian-3rdparty-snapshot</id>
+            <url>https://maven.atlassian.com/3rdparty-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

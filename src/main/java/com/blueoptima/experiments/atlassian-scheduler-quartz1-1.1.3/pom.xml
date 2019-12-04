@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.scheduler</groupId>
+        <artifactId>atlassian-scheduler</artifactId>
+        <version>1.1.3</version>
+    </parent>
+
+    <artifactId>atlassian-scheduler-quartz1</artifactId>
+
+    <name>Atlassian Scheduler - Quartz1 Implementation</name>
+    <dependencies>
+        <!-- Externals -->
+        <dependency>
+            <groupId>com.atlassian.annotations</groupId>
+            <artifactId>atlassian-annotations</artifactId>
+            <version>${atlassian-annotations.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.bundles</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.util.concurrent</groupId>
+            <artifactId>atlassian-util-concurrent</artifactId>
+            <version>${atlassian-util-concurrent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Quartz 1.x -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz1.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-oracle</artifactId>
+            <version>${quartz1.version}</version>
+        </dependency>
+
+        <!-- Inter-module -->
+        <dependency>
+            <groupId>com.atlassian.scheduler</groupId>
+            <artifactId>atlassian-scheduler-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.scheduler</groupId>
+            <artifactId>atlassian-scheduler-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

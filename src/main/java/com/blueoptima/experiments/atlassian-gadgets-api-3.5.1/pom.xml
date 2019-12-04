@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.gadgets</groupId>
+        <artifactId>atlassian-gadgets</artifactId>
+        <version>3.5.1</version>
+    </parent>
+    <artifactId>atlassian-gadgets-api</artifactId>
+    <name>Atlassian Gadgets API</name>
+    <description>Public Atlassian Gadgets API</description>
+    <packaging>atlassian-plugin</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-refapp-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Import-Package>
+                            !sun.misc*,
+                            *
+                        </Import-Package>
+                        <Export-Package>
+                            com.atlassian.gadgets,
+                            com.atlassian.gadgets.dashboard,
+                            com.atlassian.gadgets.dashboard.view,
+                            com.atlassian.gadgets.directory,
+                            com.atlassian.gadgets.plugins,
+                            com.atlassian.gadgets.spec,
+                            com.atlassian.gadgets.view,
+                            com.atlassian.gadgets.opensocial,
+                            com.atlassian.gadgets.opensocial.model,
+                            com.atlassian.gadgets.event,
+                            com.atlassian.gadgets.feed
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-webfragment</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--
+          - The JSR-305 and JCIP annotations use the runtime retention policy, so host apps will need them available
+          - on the classpath with this API JAR
+          -->
+        <dependency>
+            <groupId>net.sourceforge.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

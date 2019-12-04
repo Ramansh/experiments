@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.beehive</groupId>
+        <artifactId>beehive</artifactId>
+        <version>0.1.3</version>
+    </parent>
+
+    <artifactId>beehive-core</artifactId>
+
+    <name>Beehive - Implementation</name>
+
+    <dependencies>
+        <!-- Internal -->
+        <dependency>
+            <groupId>com.atlassian.beehive</groupId>
+            <artifactId>beehive-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- External -->
+        <dependency>
+            <groupId>com.atlassian.scheduler</groupId>
+            <artifactId>atlassian-scheduler-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.annotations</groupId>
+            <artifactId>atlassian-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.bundles</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!-- Tests -->
+        <dependency>
+            <groupId>com.atlassian.beehive</groupId>
+            <artifactId>beehive-core-tck</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+        <!-- Transitive provided dependency that is exercised in tests -->
+        <dependency>
+            <groupId>com.atlassian.util.concurrent</groupId>
+            <artifactId>atlassian-util-concurrent</artifactId>
+            <version>2.4.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Transitive provided dependency that is exercised in tests -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>10.0.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.atlassian.blobstore</groupId>
+    <artifactId>blobstore-client-api</artifactId>
+    <packaging>jar</packaging>
+    <description>blobstore-client-api</description>
+    <version>1.0.26</version>
+    <name>blobstore-client-api</name>
+    <organization>
+        <name>io.atlassian.blobstore</name>
+    </organization>
+    <licenses>
+        <license>
+            <name>Atlassian 3.0 End User License Agreement</name>
+            <url>http://www.atlassian.com/end-user-agreement/</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://stash.atlassian.com/projects/ES/repos/sawa</url>
+        <connection>scm:ssh://git@stash.atlassian.com:7997/ES/sawa.git</connection>
+        <developerConnection>scm:git:ssh://git@stash.atlassian.com:7997/ES/sawa.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://sdog.jira.com/secure/RapidBoard.jspa?rapidView=93</url>
+    </issueManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.fugue</groupId>
+            <artifactId>fugue</artifactId>
+            <version>1.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.util.concurrent</groupId>
+            <artifactId>atlassian-util-concurrent</artifactId>
+            <version>2.4.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.guava-osgi</groupId>
+            <artifactId>guava-osgi</artifactId>
+            <version>10.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

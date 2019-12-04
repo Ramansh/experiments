@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.analytics</groupId>
+        <artifactId>analytics-project</artifactId>
+        <version>3.15</version>
+    </parent>
+
+    <groupId>com.atlassian.analytics</groupId>
+    <artifactId>analytics-api</artifactId>
+
+    <name>Analytics Client API Plugin</name>
+    <description>API for analytics event publishers</description>
+    <packaging>bundle</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            com.atlassian.analytics.api.annotations
+                        </Export-Package>
+                        <Spring-Context>*;timeout:=60</Spring-Context>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <!-- When using packaging=bundle we need to attach the bundle artifact to the build -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>attach-bundle-artifact</id>
+                        <phase>package</phase>
+                        <goals>
+                        <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                                    <type>jar</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

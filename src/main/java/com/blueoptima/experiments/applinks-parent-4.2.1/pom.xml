@@ -1,0 +1,424 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>atlassian-public-pom</artifactId>
+        <version>29.14</version>
+    </parent>
+
+    <groupId>com.atlassian.applinks</groupId>
+    <artifactId>applinks-parent</artifactId>
+    <version>4.2.1</version>
+    <name>AppLinks Parent POM</name>
+    <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <modules>
+        <module>applinks-api</module>
+        <module>applinks-spi</module>
+        <module>applinks-host</module>
+        <module>applinks-plugin</module>
+        <module>applinks-pageobjects</module>
+        <module>applinks-tests</module>
+    </modules>
+
+    <properties>
+        <platform.version>2.20.0-m03</platform.version>
+        <sal.version>2.10.0</sal.version>
+        <atlassian-cache.version>2.0.8</atlassian-cache.version>
+        <event.version>2.1.1</event.version>
+        <plug.version>3.0.0</plug.version>
+        <webfragment.version>3.0.0</webfragment.version>
+        <webresource.version>3.0.0</webresource.version>
+        <rest.version>2.6.0</rest.version>
+        <trust.version>2.5.1</trust.version>
+        <oauth.version>1.8.1</oauth.version>
+        <util.concurrent.version>2.0.0</util.concurrent.version>
+        <atr.version>2.0.0-m4</atr.version>
+        <soy.version>1.1.6</soy.version>
+        <confluence.version>5.5-m6</confluence.version>
+        <jdkLevel>1.6</jdkLevel>
+        <clover.Version>3.0.2</clover.Version>
+        <amps.version>4.1.5</amps.version>
+        <org.json.version>20070829</org.json.version>
+        <skip.integration.tests>true</skip.integration.tests>
+        <atlassian.webdriver.version>2.2-m01</atlassian.webdriver.version>
+        <junit.version>4.11</junit.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <surefire.version>2.4.2</surefire.version>
+        <slf4j.version>1.6.4</slf4j.version>
+        <darkfeatures.rest.version>0.6</darkfeatures.rest.version>
+        <annotations.version>0.7</annotations.version>
+        <guava.version>11.0.2-atlassian-01</guava.version>
+        <guava.bridge.version>11.0.2-atlassian-01</guava.bridge.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>it</id>
+            <properties>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Logging -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.7</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.bundles</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-api</artifactId>
+                <version>${sal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.cache</groupId>
+                <artifactId>atlassian-cache-api</artifactId>
+                <version>${atlassian-cache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.cache</groupId>
+                <artifactId>atlassian-cache-memory</artifactId>
+                <version>${atlassian-cache.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.event</groupId>
+                <artifactId>atlassian-event</artifactId>
+                <version>${event.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.collections</groupId>
+                        <artifactId>google-collections</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-osgi</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.annotations</groupId>
+                <artifactId>atlassian-annotations</artifactId>
+                <version>${annotations.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>applinks-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>applinks-spi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.util.concurrent</groupId>
+                <artifactId>atlassian-util-concurrent</artifactId>
+                <version>${util.concurrent.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+
+            <!-- REST -->
+            <dependency>
+                <groupId>com.atlassian.plugins.rest</groupId>
+                <artifactId>atlassian-rest-module</artifactId>
+                <version>${rest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins.rest</groupId>
+                <artifactId>atlassian-rest-common</artifactId>
+                <version>${rest.version}</version>
+            </dependency>
+
+            <!-- TRUST -->
+            <dependency>
+                <groupId>com.atlassian.security.auth.trustedapps</groupId>
+                <artifactId>atlassian-trusted-apps-core</artifactId>
+                <version>${trust.version}</version>
+            </dependency>
+
+            <!-- PLUG -->
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-core</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-webfragment</artifactId>
+                <version>${webfragment.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-webresource</artifactId>
+                <version>${webresource.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-spring</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+
+            <!-- OAUTH -->
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-api</artifactId>
+                <version>${oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-consumer-spi</artifactId>
+                <version>${oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-service-provider-spi</artifactId>
+                <version>${oauth.version}</version>
+            </dependency>
+
+            <!-- ATR -->
+            <dependency>
+                <groupId>com.atlassian.templaterenderer</groupId>
+                <artifactId>atlassian-template-renderer-api</artifactId>
+                <version>${atr.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.soy</groupId>
+                <artifactId>soy-template-renderer-api</artifactId>
+                <version>${soy.version}</version>
+            </dependency>
+
+            <!-- BUILDENG-1542 Resolve build problem with Jersey (coming via atlassian-rest) -->
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>1.8-atlassian-6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>1.8-atlassian-6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-core</artifactId>
+                <version>1.8-atlassian-6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty</artifactId>
+                <version>6.1.25</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- this is here because every test lib comes with their own version of junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit-dep</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.8.5</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-test-resources</artifactId>
+                <version>${sal.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-dark-features-rest-plugin</artifactId>
+                <version>${darkfeatures.rest.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-dark-features-test-utils</artifactId>
+                <version>${darkfeatures.rest.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.atlassian.maven.plugins</groupId>
+                    <artifactId>maven-amps-plugin</artifactId>
+                    <version>${amps.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <!--<enableFastdev>false</enableFastdev>-->
+                        <!--<enableDevToolbox>false</enableDevToolbox>-->
+                        <!--<enablePde>false</enablePde>-->
+                        <skipAllPrompts>true</skipAllPrompts>
+                        <systemPropertyVariables>
+                            <upm.pac.disable>true</upm.pac.disable>
+                            <atlassian.upm.server.data.disable>true</atlassian.upm.server.data.disable>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/Test*.java</include>
+                            <include>**/*Test.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>it/**/*</exclude>
+                            <exclude>selenium/**/*</exclude>
+                            <exclude>**/*$*</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <!-- https://ecosystem.atlassian.net/browse/AMPS-927 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${surefire.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.atlassian.maven.plugins</groupId>
+                    <artifactId>maven-amps-dispatcher-plugin</artifactId>
+                    <version>${amps.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>enforce-banned-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <bannedDependencies>
+                                    <excludes>
+                                        <exclude>*:google-collections</exclude>
+                                    </excludes>
+                                </bannedDependencies>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:git:ssh://git@bitbucket.org/atlassian/application-links.git</connection>
+        <developerConnection>scm:git:ssh://git@bitbucket.org/atlassian/application-links.git</developerConnection>
+        <url>https://bitbucket.org/atlassian/application-links</url>
+    </scm>
+
+</project>

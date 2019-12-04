@@ -1,0 +1,30 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>edu.mit.findstruct</groupId>
+	<artifactId>findstructapi</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>FindStructAPI</name>
+	<description>FindStructAPI is used by Apache cTAKES.  
+      It was originally developed out of mit.edu's NLP group
+  </description>
+	<url>http://groups.csail.mit.edu/medg/projects/text/findstruct</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://groups.csail.mit.edu/medg/projects/text/findstruct/FindStruct_multiple.zip</url>
+		<connection>http://groups.csail.mit.edu/medg/projects/text/findstruct/FindStruct_multiple.zip</connection>
+	</scm>
+	<developers>
+		<developer>
+			<id>...</id>
+			<name>...</name>
+			<email>...</email>
+		</developer>
+	</developers>
+</project>

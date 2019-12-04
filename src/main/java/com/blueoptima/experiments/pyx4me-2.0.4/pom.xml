@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0">
+    <!-- @version $Revision: 3401 $ ($Author: vlads $) $Date: 2009-05-05 18:31:39 -0400 (Tue, 05 May 2009) $ -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pyx4me</groupId>
+    <artifactId>pyx4me</artifactId>
+    <version>2.0.4</version><!--pyx4me-version-->
+    <name>pyx4me</name>
+    <packaging>pom</packaging>
+
+    <description>pyx4me framework</description>
+
+    <organization>
+        <name>Pyx Software Services Inc.</name>
+        <url>http://www.pyx4me.com</url>
+    </organization>
+    <inceptionYear>2006</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <url>http://www.pyx4me.com</url>
+
+    <ciManagement>
+        <system>Cruisecontrol</system>
+        <url>http://pyx4j.com/cruisecontrol-public/</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>No issue management system is defined. For now use pyx4me-users Users Discussion Group or e-mail: skarzhevskyy@gmail.com</system>
+        <url>http://groups.google.com/group/pyx4me-users</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>pyx4me-users</name>
+            <post>pyx4me-users@googlegroups.com</post>
+            <archive>http://groups.google.com/group/pyx4me-users</archive>
+        </mailingList>
+    </mailingLists>
+
+    <distributionManagement>
+        <site>
+            <id>test-pyx4j-site</id>
+            <url>file:///home/apache/pyx4j/snapshot/pyx4me</url>
+        </site>
+        <repository>
+            <id>pyx4j.com-file-release</id>
+            <url>file:///home/apache/pyx4j-repository/maven2-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>pyx4j.com-file-development</id>
+            <url>file:///home/apache/pyx4j-repository/maven2-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <url>https://pyx4j.com/viewvc/pyx4me/</url>
+		<connection>scm:svn:https://pyx4j.com/svn/pyx4me</connection>
+		<developerConnection>scm:svn:https://pyx4j.com/svn/pyx4me</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Vlad Skarzhevskyy</name>
+            <id>vlads</id>
+            <email>skarzhevskyy@gmail.com</email>
+            <organization>Pyx Software Services Inc.</organization>
+            <organizationUrl>http://www.pyx4j.com</organizationUrl>
+            <roles>
+                <role>Project admin and developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+
+        <developer>
+            <name>Michael Lifshits</name>
+            <id>michaellif</id>
+            <email>michael.lifschitz@gmail.com</email>
+            <organization>Pyx Software Services Inc.</organization>
+            <organizationUrl>http://www.pyx4j.com</organizationUrl>
+            <roles>
+                <role>Developer, Architect</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+
+    </developers>
+
+    <modules>
+        <module>pyx4me-maven-plugins</module>
+
+        <module>pyx4me-cldcunit</module>
+
+        <module>pyx4me-midlet-projects</module>
+
+        <module>pyx4me-archetypes</module>
+
+        <module>pyx4me-devices</module>
+
+        <!--module>pyx4me-incubator</module-->
+
+        <!--
+        <module>pyx4me-amt</module>
+        -->
+        <!--
+        <module>pyx4me-base</module>
+        <module>pyx4me-http-test-server</module>
+        -->
+
+        <module>pyx4me-tests</module>
+    </modules>
+
+<!--
+    <repositories>
+        <repository>
+            <id>pyx4me-web</id>
+            <url>http://www.pyx4me.com/maven2</url>
+        </repository>
+        <repository>
+            <id>microemu-web</id>
+            <url>http://www.microemu.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>pyx4me-web</id>
+            <url>http://www.pyx4me.com/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+-->
+    <properties>
+        <pyx4jVersion>1.0.1</pyx4jVersion>
+        <jettyVersion>6.1.1</jettyVersion>
+        <me2Version>2.0.3</me2Version><!--me-version-->
+        <bluecoveVersion>2.1.0</bluecoveVersion><!--bluecove-version-->
+        <jourVersion>2.0.3</jourVersion>
+
+        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.microemu</groupId>
+                <artifactId>microemulator</artifactId>
+                <version>2.0.3</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!--
+            <dependency>
+                <groupId>de.avetana-gmbh</groupId>
+                <artifactId>avetana-bluetooth</artifactId>
+                <version>1.3.11-p1</version>
+            </dependency>
+            -->
+
+            <dependency>
+                <groupId>net.sf.bluecove</groupId>
+                <artifactId>bluecove</artifactId>
+                <version>2.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.jour</groupId>
+                <artifactId>jour-instrument</artifactId>
+                <version>2.0.3</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+
+        <pluginManagement>
+            <plugins>
+               <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.5</source>
+                        <target>1.5</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <testFailureIgnore>false</testFailureIgnore>
+                        <!-- fix bug in report generation -->
+                        <forkMode>always</forkMode>
+                        <includes>
+                            <include>**/*Test.*</include>
+                            <include>**/*Tests.*</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Version>${label}</Version>
+                            <Build-Time>${cctimestamp}</Build-Time>
+                            <Implementation-Version>${pom.version}</Implementation-Version>
+                            <SVN-Revision>${scm.revision}</SVN-Revision>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <!-- fix for site.xml TODO see version 7 -->
+                <version>2.0-beta-5</version>
+                <configuration>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>site-fix-css</id>
+                        <phase>site</phase>
+                        <goals>
+                          <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <replace dir="${project.build.directory}/site">
+                                    <include name="*.html"></include>
+                                    <replacefilter token="#build#" value="${label}"/>
+                                    <replacefilter token="#version#" value="${version}"/>
+                                    <replacetoken><![CDATA[</body>]]></replacetoken>
+                                    <replacevalue><![CDATA[<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script><script type="text/javascript">_uacct = "UA-1249205-4";urchinTracker();</script></body>]]></replacevalue>
+                                </replace>
+                                <copy overwrite="true" failonerror="false"
+                                      file="${basedir}/../target/site/css/site-child.css"
+                                      tofile="${project.build.directory}/site/css/site.css"/>
+                                <!-- this done for deep child modules  -->
+                                <copy overwrite="true" failonerror="false"
+                                      file="${basedir}/../target/site/css/site-child.css"
+                                      tofile="${project.build.directory}/site/css/site-child.css"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <profiles>
+        <profile>
+            <id>build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <inherited>true</inherited>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <reportSets>
+                   <reportSet>
+                      <reports>
+                         <!--report>dependencies</report-->
+                         <report>dependency-convergence</report>
+                         <report>project-team</report>
+                         <report>plugin-management</report>
+                         <report>mailing-list</report>
+                         <report>cim</report>
+                         <report>issue-tracking</report>
+                         <report>license</report>
+                         <report>scm</report>
+                         <report>summary</report>
+                      </reports>
+                   </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <quiet>true</quiet>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <linkXref>true</linkXref>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>1.5</targetJdk>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <!-- http://maven.apache.org/plugins/maven-jxr-plugin/jxr-mojo.html -->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report-only</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <!--plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>simian-report-maven-plugin</artifactId>
+               <version>1.0-tmp</version>
+            </plugin-->
+            <!--artifactId>maven-changelog-plugin</artifactId-->
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>changelog-maven-plugin</artifactId>
+                <configuration>
+                    <basedir>${basedir}</basedir>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>dual-report</id>
+                        <configuration>
+                            <type>range</type>
+                            <range>30</range>
+                        </configuration>
+                        <reports>
+                            <report>changelog</report>
+                            <report>file-activity</report>
+                            <report>dev-activity</report>
+                        </reports>
+                  </reportSet>
+                </reportSets>
+            </plugin>
+            -->
+       </plugins>
+    </reporting>
+
+</project>

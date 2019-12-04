@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>atlassian-public-pom</artifactId>
+        <version>29.16</version>
+    </parent>
+
+    <groupId>com.atlassian.gzipfilter</groupId>
+    <artifactId>atlassian-gzipfilter-parent</artifactId>
+    <version>1.17</version>
+    <packaging>pom</packaging>
+
+    <name>Atlassian Gzip Filter, Parent POM</name>
+    <description>
+        Atlassian Gzip Filter adds gzip filtering capabilities to your
+        web application transparently by using a servlet filter.
+    </description>
+    <url>http://docs.atlassian.com/${project.artifactId}/${project.version}</url>
+
+    <scm>
+        <connection>scm:svn:https://svn.atlassian.com/svn/public/atlassian/atlassian-gzipfilter/tags/atlassian-gzipfilter-parent-1.17</connection>
+        <developerConnection>scm:svn:https://svn.atlassian.com/svn/public/atlassian/atlassian-gzipfilter/tags/atlassian-gzipfilter-parent-1.17</developerConnection>
+        <url>https://svn.atlassian.com/fisheye/browse/public/atlassian/atlassian-gzipfilter/tags/atlassian-gzipfilter-parent-1.17</url>
+    </scm>
+
+    <issueManagement>
+        <system>Jira</system>
+        <url>http://jira.atlassian.com/browse/GZIPFILTER</url>
+    </issueManagement>
+
+    <modules>
+        <module>atlassian-gzipfilter</module>
+        <module>atlassian-gzipfilter-test-webapps</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.3</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <site>
+            <id>atlassian-documentation</id>
+            <url>scpexe://docs-app.internal.atlassian.com/var/www/domains/docs.atlassian.com/${project.artifactId}/${project.version}</url>
+        </site>
+    </distributionManagement>
+</project>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright by sumit yadav
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>com.blueoptima</groupId>
+        <artifactId>ce-engine-parent</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>executor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <junit.version>4.11</junit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+   <!-- <repositories>
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+        <repository>
+            <id>my-local-repo</id>
+            <url>file://${basedir}/lib/</url>
+        </repository>
+    </repositories>-->
+
+    <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1100-jdbc41</version>
+        </dependency>
+        <dependency>
+            <groupId>com.blueoptima</groupId>
+            <artifactId>analytics</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javafx</groupId>
+            <artifactId>jfxrt</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jfxrt.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/libs
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

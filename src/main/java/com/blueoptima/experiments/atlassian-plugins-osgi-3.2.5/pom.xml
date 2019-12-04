@@ -1,0 +1,284 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.plugins</groupId>
+        <artifactId>atlassian-plugins-parent</artifactId>
+        <version>3.2.5</version>
+    </parent>
+
+    <artifactId>atlassian-plugins-osgi</artifactId>
+
+    <name>Atlassian Plugins - OSGi Loader</name>
+    <description>
+        An extension to Atlassian Plugins that provides a loader that loads plugins into OSGi
+    </description>
+
+    <properties>
+        <!-- This should use ${project.build.directory} instead of target, but Maven < 2.0.9 fails to interpolate. -->
+        <frameworkBundleDirectory>target/framework-bundles</frameworkBundleDirectory>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-framework-bundles</id>
+                        <phase>prepare-package</phase>
+
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+
+                                <artifactItem>
+                                    <groupId>org.springframework</groupId>
+                                    <artifactId>spring</artifactId>
+
+                                    <version>${springJdk8Version}</version>
+                                </artifactItem>
+                                
+                                <artifactItem>
+                                    <groupId>org.springframework.osgi</groupId>
+
+                                    <artifactId>spring-osgi-annotation</artifactId>
+                                    <version>${springDmVersion}</version>
+                                </artifactItem>
+
+                                <artifactItem>
+                                    <groupId>org.springframework.osgi</groupId>
+                                    <artifactId>spring-osgi-core</artifactId>
+
+                                    <version>${springDmVersion}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.springframework.osgi</groupId>
+                                    <artifactId>spring-osgi-extender</artifactId>
+
+                                    <version>${springDmVersion}</version>
+                                    <type>bundle</type>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.springframework.osgi</groupId>
+                                    <artifactId>spring-osgi-io</artifactId>
+                                    <version>${springDmVersion}</version>
+                                </artifactItem>
+
+                                <artifactItem>
+                                    <groupId>com.atlassian.bundles</groupId>
+                                    <artifactId>velocity</artifactId>
+                                    <version>1.6.2-1</version>
+                                </artifactItem>
+
+                                <artifactItem>
+                                    <groupId>org.slf4j</groupId>
+                                    <artifactId>jcl-over-slf4j</artifactId>
+                                </artifactItem>
+
+                            </artifactItems>
+                            <outputDirectory>${frameworkBundleDirectory}</outputDirectory>
+
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-internal-framework-bundles</id>
+                        <phase>prepare-package</phase>
+
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${frameworkBundleDirectory}</outputDirectory>
+                            <includeArtifactIds>atlassian-plugins-osgi-bridge,atlassian-plugins-osgi-spring-extender
+                            </includeArtifactIds>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+
+                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                            <includeArtifactIds>atlassian-plugins-simpletest</includeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <finalName>osgi</finalName>
+                    <descriptors>
+                        <descriptor>src/main/assembly/framework-bundles.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-framework-bundles</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>attached</goal>
+
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>it/**/*</exclude>
+                        <!-- this delicate flower needs to be in the com.atlassian.plugin.osgi.spring package to be visible -->
+                        <exclude>**/TestServiceUnavailable*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>it/**/*</include>
+                                <include>**/TestServiceUnavailable*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-spring-extender</artifactId>
+            <version>${project.version}</version>
+            <type>bundle</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-events</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-bridge</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>biz.aQute</groupId>
+            <artifactId>bndlib</artifactId>
+            <version>1.43.0-atlassian-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${springJdk8Version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springVersion}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${springVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.twdata.pkgscanner</groupId>
+            <artifactId>package-scanner</artifactId>
+            <version>0.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.test</groupId>
+            <artifactId>atlassian-plugins-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins.test</groupId>
+            <artifactId>atlassian-plugins-simpletest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-servlet</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- This tests the ability of Spring DM to access xerces due to lame service finding algorithms in JAXP -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.9.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Needed to compile TestServiceUnavailable -->
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>spring-osgi-core</artifactId>
+            <version>${springDmVersion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,28 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.googlecode.armbrust-file-utils</groupId>
+	<artifactId>sqlwrapper</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>sqlwrapper</name>
+	<description>SQLWrapper</description>
+	<url>http://code.google.com/p/armbrust-file-utils/</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://armbrust-file-utils.googlecode.com/svn/trunk/SQLWrapper/</url>
+		<connection>http://armbrust-file-utils.googlecode.com/svn/trunk/SQLWrapper/</connection>
+	</scm>
+	<developers>
+		<developer>
+			<id>...</id>
+			<name>...</name>
+			<email>...</email>
+		</developer>
+	</developers>
+</project>

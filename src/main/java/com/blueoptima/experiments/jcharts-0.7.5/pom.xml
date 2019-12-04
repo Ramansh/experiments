@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jcharts</groupId>
+    <artifactId>jcharts</artifactId>
+    <packaging>jar</packaging>
+    <name>jCharts</name>
+    <version>0.7.5</version>
+    <description>jCharts is a 100% Java based charting utility that outputs a variety of charts. This package has been
+        designed from the ground up by volunteers for displaying charts via Servlets, JSP's, and Swing apps. First
+        release was in December 2000.
+    </description>
+    <url>http://jcharts.sourceforge.net/</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 1.1</name>
+            <url>http://www.apache.org/licenses/LICENSE-1.1.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>http://jcharts.cvs.sourceforge.net/jcharts/</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>arb_jack</id>
+            <name>Adam Jack</name>
+        </developer>
+        <developer>
+            <id>chalko</id>
+            <name>Nick Chalko</name>
+        </developer>
+        <developer>
+            <id>gstamp</id>
+            <name>Glen Stampoultzis</name>
+        </developer>
+        <developer>
+            <id>jmaerki</id>
+            <name>Jeremias Märki</name>
+        </developer>
+        <developer>
+            <id>nathaniel_auvil</id>
+            <name>Nathaniel G. Auvil</name>
+        </developer>
+        <developer>
+            <id>nioclaken</id>
+            <name>Nicola Ken Barozzi</name>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <status>deployed</status>
+    </distributionManagement>
+</project>

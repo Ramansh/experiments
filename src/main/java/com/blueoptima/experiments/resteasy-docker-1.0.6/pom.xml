@@ -1,0 +1,132 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>uk.ac.cam.cl.dtg.web</groupId>
+  <artifactId>resteasy-docker</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.6</version>
+  <name>resteasy-docker</name>
+
+  <properties>
+    <resteasy.version>3.0.8.Final</resteasy.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <scm>
+    <developerConnection>scm:git:ssh://git@github.com/ucam-cl-dtg/resteasy-docker.git
+    </developerConnection>
+    <tag>resteasy-docker-1.0.6</tag>
+  </scm>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.eclipse.jetty.websocket</groupId>
+      <artifactId>websocket-client</artifactId>
+      <version>9.3.7.v20160115</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jaxrs</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+      <version>${resteasy.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>11.0.1</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.7</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.17</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.1</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <configuration>
+              <configLocation>checkstyle.xml</configLocation>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>dtg-code</id>
+      <name>RepositoryProxy</name>
+      <url>http://dtg-maven.cl.cam.ac.uk/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>dtg-code</id>
+      <name>RepositoryProxy</name>
+      <url>http://dtg-maven.cl.cam.ac.uk/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>

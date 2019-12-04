@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.megginson.sax</groupId>
+    <artifactId>xml-writer</artifactId>
+    <version>0.2</version>
+    <packaging>jar</packaging>
+    <name>XMLWriter</name>
+    <url>http://www.megginson.com/Software</url>
+    <description>XML Writer for SAX parsers.</description>
+    <licenses>
+        <license>
+            <name>Public Domain</name>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <dependencies>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.0.b2</version>
+        </dependency>
+    </dependencies>
+    <distributionManagement>
+        <downloadUrl>http://www.megginson.com/Software/xml-writer-0.2.zip</downloadUrl>
+    </distributionManagement> 
+</project>
+

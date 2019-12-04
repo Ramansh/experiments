@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>base-pom</artifactId>
+        <version>3.0.91</version>
+        <relativePath>../base-pom</relativePath>
+    </parent>
+
+    <artifactId>closedsource-pom</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Atlassian Closed Source POM</name>
+
+    <distributionManagement>
+        <repository>
+            <id>atlassian-private</id>
+            <name>Atlassian Closed Source Repository</name>
+            <url>https://maven.atlassian.com/closedsource</url>
+        </repository>
+        <snapshotRepository>
+            <id>atlassian-private-snapshot</id>
+            <name>Atlassian Closed Source Snapshot Repository</name>
+            <url>https://maven.atlassian.com/closedsource-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>nexusStaging</id>
+            <activation>
+                <property>
+                    <name>!skip.nexus.staging</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,30 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.sourceforge.openai</groupId>
+	<artifactId>openaifsm</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>OpenAI_FSM</name>
+	<description>OpenAI FSM is used by Apache cTAKES.  
+      It was originally developed out of sourceforge openAI group
+  </description>
+	<url>https://sourceforge.net/projects/openai/</url>
+	<licenses>
+		<license>
+			<name>BSD License</name>
+			<url>http://opensource.org/licenses/BSD-2-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://openai.cvs.sourceforge.net/viewvc/openai/java-fsm</url>
+		<connection>http://openai.cvs.sourceforge.net/viewvc/openai/java-fsm</connection>
+	</scm>
+	<developers>
+		<developer>
+			<id>...</id>
+			<name>...</name>
+			<email>...</email>
+		</developer>
+	</developers>
+</project>

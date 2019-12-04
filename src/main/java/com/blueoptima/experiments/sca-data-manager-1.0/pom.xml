@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.blueoptima.ci</groupId>
+  <artifactId>sca-data-manager</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+  <name>sca-data-manager</name>
+
+  <properties>
+    <spring.version>5.0.7.RELEASE</spring.version>
+    <hibernate.version>5.3.3.Final</hibernate.version>
+    <apache.lucene.version>5.5.5</apache.lucene.version>
+    <activemq.version>5.7.0</activemq.version>
+    <servlet.version>4.0.1</servlet.version>
+  </properties>
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.14.1</version>
+        <configuration>
+          <!-- Suite testng xml file to consider for test execution -->
+          <!--<suiteXmlFiles>-->
+            <!--&lt;!&ndash;<suiteXmlFile>./testng.xml</suiteXmlFile>&ndash;&gt;-->
+            <!--&lt;!&ndash; <suiteXmlFile>suites-test-testng.xml</suiteXmlFile> &ndash;&gt;-->
+            <!---->
+          <!--</suiteXmlFiles>-->
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>src/main/resources/</directory>
+              <includes>
+                <include>*.jar</include>
+              </includes>
+              <targetPath>WEB-INF/lib</targetPath>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+      <!--<plugin>-->
+        <!--&lt;!&ndash; Build an executable JAR &ndash;&gt;-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-jar-plugin</artifactId>-->
+        <!--<version>3.1.0</version>-->
+        <!--<configuration>-->
+          <!--<archive>-->
+            <!--<manifest>-->
+              <!--<addClasspath>true</addClasspath>-->
+              <!--<classpathPrefix>lib/</classpathPrefix>-->
+              <!--<mainClass>com.blueoptima.ci.MainForCollectingDependencies</mainClass>-->
+              <!--<classpathPrefix>dependency-jars/</classpathPrefix>-->
+            <!--</manifest>-->
+          <!--</archive>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
+
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-dependency-plugin</artifactId>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<id>copy-dependencies</id>-->
+            <!--<phase>package</phase>-->
+            <!--<goals>-->
+              <!--<goal>copy-dependencies</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+              <!--<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>-->
+            <!--</configuration>-->
+          <!--</execution>-->
+        <!--</executions>-->
+      <!--</plugin>-->
+
+    </plugins>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
+    <finalName>${project.artifactId}</finalName>
+  </build>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jms</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.0.9.RELEASE</version>
+    </dependency>
+
+    <!-- Servlet API -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${servlet.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>javax.jms-api</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
+    <!--
+    Added to resolve error :: org.jboss.weld.resources.spi.ResourceLoadingException:
+    Error while loading class org.springframework.http.server.reactive.ServletServerHttpRequest$RequestAsyncListener
+    -->
+    <dependency>
+      <groupId>org.reactivestreams</groupId>
+      <artifactId>reactive-streams</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+
+    <!-- ActiveMQ -->
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-core</artifactId>
+      <version>${activemq.version}</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>org.apache.activemq</groupId>-->
+      <!--<artifactId>activemq-optional</artifactId>-->
+      <!--<version>${activemq.version}</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.activemq</groupId>-->
+      <!--<artifactId>activemq-spring</artifactId>-->
+      <!--<version>${activemq.version}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>javax.validation</groupId>-->
+      <!--<artifactId>validation-api</artifactId>-->
+      <!--<version>1.1.0.Final</version>-->
+    <!--</dependency>-->
+
+
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+
+    <!--<dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <version>2.0</version>
+    </dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.16.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/stax/stax -->
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.0.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4.1212.jre7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jibx</groupId>
+      <artifactId>jibx-bind</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.10</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/jdom/jdom -->
+    <dependency>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/jaxen/jaxen -->
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>1.1.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <version>3.6.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>maven-invoker</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+    <!--<dependency>
+      <groupId>fr.dutra.tools.maven.deptree</groupId>
+      <artifactId>maven-dependency-tree-parser</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
+    </dependency>-->
+
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.11.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>4.2</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.owasp</groupId>
+      <artifactId>dependency-check-core</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.owasp</groupId>
+      <artifactId>dependency-check-utils</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.10.19</version>
+    </dependency>
+
+    <!--<dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>14.0</version>
+    </dependency>-->
+
+    <dependency>
+      <groupId>org.blueoptima</groupId>
+      <artifactId>sca-analyzer-commons</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/sca-analyzer-1.0.0-commons.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.blueoptima</groupId>
+      <artifactId>sca-analyzer-core</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/sca-analyzer-1.0.0-core.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>${apache.lucene.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-queryparser</artifactId>
+      <version>${apache.lucene.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-analyzers-common</artifactId>
+      <version>${apache.lucene.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-embedder</artifactId>
+      <version>3.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.aether</groupId>
+      <artifactId>aether-connector-wagon</artifactId>
+      <version>0.9.0.M2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.wagon</groupId>
+      <artifactId>wagon-http-lightweight</artifactId>
+      <version>2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.whitesource</groupId>
+      <artifactId>maven-dependency-tree-parser</artifactId>
+      <version>1.0.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.owasp.encoder/encoder -->
+    <dependency>
+      <groupId>org.owasp.encoder</groupId>
+      <artifactId>encoder</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+
+  </dependencies>
+</project>

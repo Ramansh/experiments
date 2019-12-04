@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.atlassian.pom</groupId>
+        <artifactId>public-pom</artifactId>
+        <version>3.0.2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.atlassian.plugin</groupId>
+    <artifactId>atlassian-spring-scanner-parent</artifactId>
+    <version>1.2.2</version>
+    <organization>
+        <name>Atlassian</name>
+        <url>http://atlassian.com/</url>
+    </organization>
+    <modules>
+        <module>atlassian-spring-scanner-core</module>
+        <module>atlassian-spring-scanner-annotation</module>
+        <module>atlassian-spring-scanner-processor</module>
+        <module>atlassian-spring-scanner-runtime</module>
+        <module>atlassian-spring-scanner-maven-plugin</module>
+        <module>atlassian-spring-scanner-dynamic-contexts</module>
+        <module>atlassian-spring-scanner-test</module>
+    </modules>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <name>Atlassian Spring Scanner Parent</name>
+    <description>A set of tools and libraries to ease in creating no-transform Atlassian plugins using java annotations</description>
+    <packaging>pom</packaging>
+
+    <scm>
+        <connection>scm:git:ssh://git@bitbucket.org/atlassian/atlassian-spring-scanner.git</connection>
+        <developerConnection>scm:git:ssh://git@bitbucket.org/atlassian/atlassian-spring-scanner.git</developerConnection>
+        <url>https://bitbucket.org/atlassian/atlassian-spring-scanner</url>
+    </scm>
+       
+    <properties>
+        <guava.version>10.0.1</guava.version>
+        <spring.version>2.5.6</spring.version>
+        <spring.osgi.version>1.2.1</spring.osgi.version>
+        <gemini.blueprint.version>1.0.2.RELEASE</gemini.blueprint.version>
+        <atlassian.plugins.version>3.0.0</atlassian.plugins.version>
+        <atlassian.jira.version>6.0</atlassian.jira.version>
+        <atlassian.confluence.version>5.3-OD-6</atlassian.confluence.version>
+    </properties>
+</project>

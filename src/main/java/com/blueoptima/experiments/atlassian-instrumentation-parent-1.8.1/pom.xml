@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>atlassian-closedsource-pom</artifactId>
+        <groupId>com.atlassian.pom</groupId>
+        <version>41</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.atlassian.instrumentation</groupId>
+    <artifactId>atlassian-instrumentation-parent</artifactId>
+    <name>Atlassian Instrumentation Parent POM</name>
+    <packaging>pom</packaging>
+    <version>1.8.1</version>
+
+    <description>
+        Parent POM for a series of libraries that give systems the ability to instrument their internal state through
+        the use of counters / gauges and general operation profiling
+    </description>
+
+    <scm>
+        <connection>scm:hg:ssh://hg@bitbucket.org/atlassian/atlassian-instrumentation</connection>
+        <developerConnection>scm:hg:ssh://hg@bitbucket.org/atlassian/atlassian-instrumentation</developerConnection>
+    </scm>
+
+    <modules>
+     		<module>atlassian-instrumentation-core</module>
+     		<module>atlassian-instrumentation-expose-jmx</module>
+     		<module>atlassian-instrumentation-expose-rest</module>
+     		<module>atlassian-instrumentation-expose-rrd</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>java.awt.headless</name>
+                            <value>true</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdkLevel}</source>
+                    <target>${jdkLevel}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.sf.alchim</groupId>
+                    <artifactId>yuicompressor-maven-plugin</artifactId>
+                    <version>0.7.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.twdata.maven</groupId>
+                    <artifactId>cargo-maven2-plugin</artifactId>
+                    <version>1.0-beta-2-db2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.google.collections</groupId>
+                <artifactId>google-collections</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
+
+            <!--
+            ===============================================================================================================
+
+            There is a bug whereby if we use the platform include mechanism then we cant include that plugin in a product like JIRA
+
+            http://jira.codehaus.org/browse/MNG-4148
+
+            http://confluence.atlassian.com/display/DEVNET/Using+the+Plugin+Development+Platform+Dependency+Management+POMs
+
+            So we repeat then here and publicly curse maven and all that sail on her!
+
+            ===============================================================================================================
+            -->
+
+            <!--<dependency>-->
+                <!--<groupId>com.atlassian.refapp</groupId>-->
+                <!--<artifactId>atlassian-platform</artifactId>-->
+                <!--<version>${refapp.version}</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
+
+            <!-- SAL -->
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-api</artifactId>
+                <version>${sal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-core</artifactId>
+                <version>${sal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-spi</artifactId>
+                <version>${sal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.sal</groupId>
+                <artifactId>sal-test-resources</artifactId>
+                <version>${sal.version}</version>
+            </dependency>
+
+            <!-- AJS -->
+            <dependency>
+                <groupId>com.atlassian.aui</groupId>
+                <artifactId>auiplugin</artifactId>
+                <version>${ajs.version}</version>
+            </dependency>
+
+            <!-- REST -->
+            <dependency>
+                <groupId>com.atlassian.plugins.rest</groupId>
+                <artifactId>atlassian-rest-module</artifactId>
+                <version>${rest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins.rest</groupId>
+                <artifactId>atlassian-rest-common</artifactId>
+                <version>${rest.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins.rest</groupId>
+                <artifactId>com.atlassian.jersey-library</artifactId>
+                <type>pom</type>
+                <version>${rest.version}</version>
+            </dependency>
+
+            <!-- PLUG -->
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-core</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-osgi</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-servlet</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-webfragment</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-webresource</artifactId>
+                <version>${plug.version}</version>
+            </dependency>
+
+            <!-- EVENT -->
+            <dependency>
+                <groupId>com.atlassian.event</groupId>
+                <artifactId>atlassian-event</artifactId>
+                <version>${event.version}</version>
+            </dependency>
+
+            <!-- end of inclusion
+            ===============================================================================================================
+            -->
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.7</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <jdkLevel>1.6</jdkLevel>
+        <refapp.version>2.9.1</refapp.version>
+        <concurrent.version>2.1.0</concurrent.version>
+        <spring.version>2.5.6</spring.version>
+
+        <!-- see the bug above and why we have repeated the version info here for platform -->
+        <plug.version>2.7.3</plug.version>
+        <sal.version>2.10.9</sal.version>
+        <rest.version>2.4.0</rest.version>
+        <ajs.version>3.3.1</ajs.version>
+        <event.version>2.0.5</event.version>
+
+    </properties>
+</project>

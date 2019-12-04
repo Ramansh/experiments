@@ -1,0 +1,193 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mycila</groupId>
+    <artifactId>licenses</artifactId>
+    <version>1</version>
+    <packaging>jar</packaging>
+
+    <name>mycila-licenses</name>
+    <description>Mycila Licenses</description>
+    <inceptionYear>2013</inceptionYear>
+    <url>http://github.com/mycila/licenses</url>
+
+    <properties>
+        <jdk.version>1.7</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@github.com:mycila/licenses.git</connection>
+        <developerConnection>scm:git:git@github.com:mycila/licenses.git</developerConnection>
+        <url>http://github.com/mycila/licenses</url>
+      <tag>licenses-1</tag>
+  </scm>
+
+    <organization>
+        <name>Mycila</name>
+        <url>http://www.mycila.com/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>mathieucarbou</id>
+            <name>Mathieu Carbou</name>
+            <email>mathieu.carbou@gmail.com</email>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <distributionManagement>
+        <repository>
+            <id>mycila-oss-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>mycila-oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>1.1.1</version>
+                    <configuration>
+                        <rules>
+                            <requireMavenVersion>
+                                <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+                                <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.</message>
+                            </requireMavenVersion>
+                        </rules>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.4</version>
+                    <configuration>
+                        <useAgent>false</useAgent>
+                        <keyname>7356EF1B</keyname>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jarsigner-plugin</artifactId>
+                    <version>1.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <passphrase>${mycila.gpg.passphrase}</passphrase>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

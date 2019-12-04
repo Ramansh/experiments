@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.atlassian.applinks</groupId>
+        <artifactId>applinks-parent</artifactId>
+        <version>4.2.1</version>
+    </parent>
+
+    <artifactId>applinks-spi</artifactId>
+    <name>Applinks SPI</name>
+    <packaging>jar</packaging>
+    <description>SPI the AppLinks plugin -- Allows developers to implement their own authentication providers and application types.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-api</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.sal</groupId>
+            <artifactId>sal-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- TEST dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

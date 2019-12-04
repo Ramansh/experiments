@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+TODO: need license header
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cloudera.kitchen</groupId>
+    <artifactId>maven-addons</artifactId>
+    <version>1.1</version>
+    <packaging>pom</packaging>
+
+    <name>Kitchen Maven plugins</name>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Cloudera</name>
+        <url>http://www.cloudera.com</url>
+    </organization>
+
+    <scm>
+        <connection>scm:git:git@git.sf.cloudera.com:maven-addons.git</connection>
+        <url>git@git.sf.cloudera.com:maven-addons.git</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>cdh.releases.repo</id>
+            <url>https://repository.cloudera.com/content/repositories/releases</url>
+            <name>CDH Releases Repository</name>
+        </repository>
+        <snapshotRepository>
+            <id>cdh.snapshots.repo</id>
+            <url>https://repository.cloudera.com/content/repositories/snapshots</url>
+            <name>CDH Snapshots Repository</name>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <modules>
+        <module>deps-to-props-plugin</module>
+        <module>build-repo-addto-plugin</module>
+        <module>build-repo-setup-plugin</module>
+        <module>crepo-scm-provider</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-core</artifactId>
+                <version>3.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cloudera.kitchen</groupId>
+                <artifactId>maven-deps-to-props-plugin</artifactId>
+                <version>1.1</version>
+                <type>maven-plugin</type>
+            </dependency>
+            <dependency>
+                <groupId>com.cloudera.kitchen</groupId>
+                <artifactId>maven-build-repo-setup-plugin</artifactId>
+                <version>1.1</version>
+                <type>maven-plugin</type>
+            </dependency>
+            <dependency>
+                <groupId>com.cloudera.kitchen</groupId>
+                <artifactId>maven-build-repo-addto-plugin</artifactId>
+                <version>1.1</version>
+                <type>maven-plugin</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
+

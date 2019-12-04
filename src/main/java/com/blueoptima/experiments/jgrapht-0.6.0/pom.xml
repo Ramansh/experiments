@@ -1,0 +1,23 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jgrapht</groupId>
+  <artifactId>jgrapht</artifactId>
+  <version>0.6.0</version>
+  <packaging>jar</packaging>
+  <name>JGraphT</name>
+  <url>http://jgrapht.sourceforge.net</url>
+  <description>JGraphT is a free Java graph library
+     that provides mathematical graph-theory objects and algorithms</description>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License Version 2.1, February 1999</name>
+      <url>http://jgrapht.sourceforge.net/LGPL.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>http://svn.sourceforge.net/jgrapht</url>
+  </scm>
+  <dependencies>
+  </dependencies>
+</project> 
